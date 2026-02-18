@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Villain Guessing Game</title>
+</head>
+<body>
+
+    <h1>Villains by Yeshwanth Reddy Kottam</h1>
+
+    <h2>Getting input</h2>
+
+    <form>
+        <label for="secret_villain">Funny Man </label>
+        <input type="password" id="secret_villain" value="Joker"> <br><br>
+
+        <label for="villain_guess">Guess the villain </label>
+        <input type="text" id="villain_guess"> <br><br>
+
+        <input type="button" onclick="checkVillain()" value="Check the guess">
+    </form>
+
+    <p id="result_counts">Caught: 0 | Got Away: 0</p>
+
+    <script> 
+        // Part 3.6: Global variables initialized to 0
+        var caught = 0;
+        var gotAway = 0;
+
+        // Part 3.7: Main game function
+        function checkVillain() {
+            // 7.a: Get value from hidden villain input
+            let secret = document.getElementById("secret_villain").value;
+            // 7.b: Get value from guess input
+            let guess = document.getElementById("villain_guess").value;
+            
+            let out = document.getElementById("result_counts");
+
+            // 7.c: Compare values, update counts, and show specific alerts
+            if (secret === guess) {
+                caught = caught + 1;
+                alert("You caught them");
+            } else {
+                gotAway = gotAway + 1;
+                alert("Maybe next time");
+            }
+
+            // 7.d: Replace innerHTML with updated caught/gotAway counts
+            out.innerHTML = "Caught: " + caught + " | Got Away: " + gotAway;
+        }
+    </script>
+
+</body>
+</html>
