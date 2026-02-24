@@ -25,40 +25,74 @@
 
     <div id="result"></div>
 
+    <hr>
+
+    <h2>Additional Operations</h2>
+    <form>
+        <input type="radio" id="power" name="operation" value="exponent" onclick="chooseOp()">
+        <label for="power">power</label><br>
+
+        <input type="radio" id="sum" name="operation" value="add" onclick="chooseOp()">
+        <label for="sum">sum</label><br>
+
+        <input type="radio" id="mod" name="operation" value="mod" onclick="chooseOp()">
+        <label for="mod">mod</label><br>
+    </form>
+
+    <div id="op_result">Operation result will appear here.</div>
+
     <script>
         // Part 5.7: Main tax computation function
         function doTax() {
-            // 7.a-d: Get values from input elements
             let income = Number(document.getElementById("income").value);
             let cutoff = Number(document.getElementById("cutoff").value);
             let baseRate = Number(document.getElementById("baseRate").value);
             let extRate = Number(document.getElementById("extRate").value);
             
-            // 7.e: Initialize local variable to an empty string
             let taxTable = "";
             let resultDiv = document.getElementById("result");
 
-            // 7.f: Create a loop that iterates 5 times
             for (let i = 1; i <= 5; i++) {
                 let incomeLevel = i * income;
                 let calculatedTax = 0;
 
-                // Logic: Charging baseRate vs. extRate based on cutoff
                 if (incomeLevel <= cutoff) {
                     calculatedTax = incomeLevel * baseRate;
                 } else {
-                    // Charge baseRate up to cutoff, and extRate for amount over cutoff
                     calculatedTax = (cutoff * baseRate) + ((incomeLevel - cutoff) * extRate);
                 }
 
-                // 7.g: Append level and tax to taxTable string
                 taxTable += "incomeLevel " + incomeLevel + " is " + calculatedTax + "; ";
             }
 
-            // 7.h: Replace innerHTML with the final table string
             resultDiv.innerHTML = "Taxes are: " + taxTable;
+        }
+
+        // Part 6.4: Function to handle radio button operations
+        function chooseOp() {
+            // 4.a-b: Get values from existing income and baseRate inputs
+            let income = Number(document.getElementById("income").value);
+            let baseRate = Number(document.getElementById("baseRate").value);
+            let out = document.getElementById("op_result");
+            let result = 0;
+            let displayMsg = "";
+
+            // 4.c: Check which radio button is selected and perform math
+            if (document.getElementById("power").checked) {
+                result = Math.pow(income, baseRate);
+                displayMsg = income + " to the power of " + baseRate + " is " + result;
+            } else if (document.getElementById("sum").checked) {
+                result = income + baseRate;
+                displayMsg = income + " + " + baseRate + " is " + result;
+            } else if (document.getElementById("mod").checked) {
+                result = income % baseRate;
+                displayMsg = income + " % " + baseRate + " is " + result;
+            }
+
+            // 4.d: Replace innerHTML for the result element
+            out.innerHTML = displayMsg;
         }
     </script>
 
 </body>
-</html>
+</html
