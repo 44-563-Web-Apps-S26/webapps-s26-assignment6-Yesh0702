@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cruise Travel Planner</title>
+</head>
+<body>
+
+    <h1>Yeshwanth Reddy Kottam travel planner</h1>
+
+    <form>
+        <input type="checkbox" id="carib" value="True">
+        <label for="carib">Caribbean</label><br>
+
+        <input type="checkbox" id="medit" value="True">
+        <label for="medit">Mediterranean</label><br>
+
+        <input type="checkbox" id="baltic" value="False">
+        <label for="baltic">Baltic</label><br><br>
+
+        <input type="button" onclick="choices()" value="Cruise Choices">
+    </form>
+
+    <hr>
+
+    <form>
+        <label for="start">Enter starting city</label>
+        <input type="text" id="start" value="Athens"><br><br>
+
+        <label for="end">Enter ending city</label>
+        <input type="text" id="end"><br><br>
+
+        <input type="button" onclick="updateTrip()" value="Update the trip">
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        // Part 8: Global variable my_trip initialized to an empty object
+        var my_trip = {};
+
+        // Part 9: Function to process checkbox choices
+        function choices() {
+            // 9.a: Reset my_trip to an empty object
+            my_trip = {};
+
+            // 9.b: Set properties based on whether checkboxes are checked
+            my_trip.cari = document.getElementById("carib").checked;
+            my_trip.medi = document.getElementById("medit").checked;
+            my_trip.balt = document.getElementById("baltic").checked;
+
+            // 9.c: Replace innerHTML with the my_trip object
+            document.getElementById("result").innerHTML = JSON.stringify(my_trip);
+        }
+
+        // Part 4: Function to update object with city data
+        function updateTrip() {
+            // 4.a-b: Get values from the input elements
+            let startVal = document.getElementById("start").value;
+            let endVal = document.getElementById("end").value;
+
+            // 4.c: Set properties using bracket notation
+            my_trip["startCity"] = startVal;
+            my_trip["endCity"] = endVal;
+
+            // 4.d: Replace innerHTML with updated my_trip object
+            document.getElementById("result").innerHTML = JSON.stringify(my_trip);
+        }
+    </script>
+
+</body>
+</html>
